@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+	http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="WS_FastLinePU"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost/mazza" />
+			<property name="hibernate.connection.username" value="postgres" />
+			<property name="hibernate.connection.password" value="facef123*" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+
+	<!-- <persistence-unit name="WS_FastLinePU" -->
+	<!-- transaction-type="RESOURCE_LOCAL"> -->
+	<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
+	<!-- <properties> -->
+	<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/> -->
+	<!-- <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" 
+		/> -->
+	<!-- <property name="hibernate.connection.url" value="jdbc:mysql://localhost/mazza" 
+		/> -->
+	<!-- <property name="hibernate.connection.username" value="mateus" /> -->
+	<!-- <property name="hibernate.connection.password" value="ferreira" /> -->
+	<!-- <property name="hibernate.show_sql" value="true" /> -->
+	<!-- <property name="hibernate.format_sql" value="true" /> -->
+	<!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
+	<!-- </properties> -->
+	<!-- </persistence-unit> -->
+
+
+	<persistence-unit name="WS_FastLinePUTest"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost/mazzaTest" />
+			<property name="hibernate.connection.username" value="postgres" />
+			<property name="hibernate.connection.password" value="facef123*" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+		</properties>
+	</persistence-unit>
+
+</persistence>

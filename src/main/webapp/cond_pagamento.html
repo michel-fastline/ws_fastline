@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Projeto WS Fastline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+      .error { color: red; }
+      .success { color: green; }
+    </style>
+    <link href="static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://twitter.github.io/bootstrap/assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/bootstrap/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/bootstrap/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="static/bootstrap/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="static/bootstrap/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="static/bootstrap/ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Projeto M</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="mailto:edson.rosati@gmail.com.br">Contato</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Menu</li>
+              <li><a href="index.html">Busca Produtos</a></li>
+              <li><a href="usuario.html">Usuário</a></li>
+              <li class="active"><a href="produto.html">Produto</a></li>
+              <li><a href="/mazza/j_spring_security_logout">Sair</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="">
+	        <div class="error hide" id="removeError">Erro ao remover.</div>
+	        <div class="success hide" id="removeSuccess">Removido com sucesso.</div>
+			<a href="#addModal" role="button" class="btn" data-toggle="modal">Novo</a>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome Condição</th>
+                  <th>Forma Pagamento</th>
+                  <th>Qtd Titulos</th>
+                  <th>Qtd Dias</th>
+                  <th>Data Cadastro</th>
+                  <th>Data Inativação</th>
+                  <th>Status</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="cond_pags"></tbody>
+            </table>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Projeto M 2013</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+ 
+<!-- Modal -->
+<div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <form id="addForm">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="addModalLabel">Novo Condição Pagamento</h3>
+  </div>
+  <div class="modal-body">
+      <div class="error hide" id="idError">Erro ao adicionar.</div>
+      <div class="success hide" id="idSuccess">Dados salvos com sucesso.</div>
+	  <input name="id_cond_pagamento" id="cond_pagIdCondicao" type="hidden" />
+	  
+
+	  
+      <label for="cond_pagNomeCondicao">Nome Condição: </label><input name="nome_condicao" id="cond_pagNomeCondicao" type="text" />
+      <label for="cond_pagFormPag">Forma de Pagamento: </label><input name="forma_pag" id="cond_pagFormPag" type="text" />
+      <label for="cond_pagQtdTitulos">Quantidade de Titulos : </label><input name="qtd_titulos" id="cond_pagQtdTitulos" type="text" />
+      <label for="cond_pagQtdDias">Quantidade de Dias : </label><input name="condicao_qtd_dias" id="cond_pagQtdDias" type="text" />
+      <label for="cond_pagDtCadastro">Data de Cadastro : </label><input name="dt_cadastro" id="cond_DtCadastro" type="date" />
+      <label for="cond_pagDtinativacao">Data de inativação : </label><input name="dt_inativacao" id="cond_DtInativacao" type="date" />
+      <label for="cond_pagStatus">Status: </label><input name="status" id="cond_pagStatus" type="text" />
+      
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true" id="fecharModal">Fechar</button>
+    <button class="btn btn-primary" type="submit">Salvar</button>
+    <a onclick=""></a>
+  </div>
+  </form>
+</div>
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="static/js/jquery-1.9.1.min.js"></script>
+    <script src="static/js/serialize-json.jquery.js"></script>
+    <script src="static/js/mazza.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        	$.getJSON(getAbsolutePath() + 'api/cond_pagamento', function(data) {
+        		var cond_pag;
+        		if (data.condPagamento.length == undefined) {
+        			cond_pag = data;
+        		} else {
+        			cond_pag = data.condPagamento;
+        		}
+        	    $.each(cond_pag, function(index, item){
+        	    	$('#cond_pags').append('<tr>');
+        	    	$('#cond_pags').append('<td>' + item.id_cond_pagamento + '</td>');
+        	    	$('#cond_pags').append('<td>' + item.nome_condicao + '</td>');
+        	    	$('#cond_pags').append('<td>' + item.forma_pag + '</td>');
+        	    	$('#cond_pags').append('<td>' + item.qtd_titulos + '</td>');
+        	    	$('#cond_pags').append('<td>' + item.condicao_qtd_dias + '</td>');
+        	    	$('#cond_pags').append('<td>' + item.dt_cadastro + '</td>');
+        	    	$('#cond_pags').append('<td>' + item.dt_inativacao + '</td>');
+        	    	$('#cond_pags').append('<td>' + item.status + '</td>');
+        	    	$('#cond_pags').append('<td><a href="#" onclick="remove('+item.id+');"><input alt="Excluir" src="static/images/delete.png" title="Excluir" type="image" value="Excluir" /></a></td>');
+        	    	$('#cond_pags').append('<td><a href="#" onclick="edit('+item.id_cond_pagamento+');"><input alt="Atualizar" src="static/images/update.png" title="Atualizar" type="image" value="Atualizar" /></a></td>');
+        	    	$('#cond_pags').append('</tr>');
+        	    });
+            });
+       });
+        
+	function edit(id_cond_pagamento) {
+		
+		 $.getJSON(getAbsolutePath() + 'api/cond_pagamento/' + id_cond_pagamento, function(data) {
+			$('#cond_pagIdCondicao').val(data.id_cond_pagamento);
+			$('#cond_pagNomeCondicao').val(data.nome_condicao);
+			$('#cond_pagFormPag').val(data.forma_pag);
+			$('#cond_pagQtdTitulos').val(data.qtd_titulos);
+			$('#cond_pagQtdDias').val(data.condicao_qtd_dias);
+			$('#cond_pagDtCadastro').val(data.dt_cadastro);
+			$('#cond_pagDtinativacao').val(data.dt_inativacao);
+			$('#cond_pagStatus').val(data.status);
+			$('#addModal').modal();
+		 });
+		return false;
+	}
+	
+	$('#fecharModal').click(function(e) {
+		$('#cond_pagIdCondicao').val('');
+		$('#cond_pagNomeCondicao').val('');
+		$('#cond_pagFormPag').val('');
+		$('#cond_pagQtdTitulos').val('');
+		$('#cond_pagQtdDias').val('');
+		$('#cond_pagDtCadastro').val('');
+		$('#cond_pagDtinativacao').val('');
+		$('#cond_pagStatus').val('');
+		$('#idError').hide();
+    	$('#idSuccess').hide();
+    	e.preventDefault(); // prevent actual form submit
+	});
+	
+	function remove(id_cond_pagamento) {
+		show("entrou");
+		//send('api/produto/remove/'+ id_produto, this, 'DELETE');
+		
+		sendDelete('api/cond_pagamento/remove/' + id_cond_pagamento);
+	}
+	
+    // add prod
+    $('#addForm').submit(function(e) {
+      if(!validateCondPagamento(this)) 
+        return false;
+        
+        if (this.id_cond_pagamento.value == '') {
+      	  send('api/cond_pagamento/add', this, 'POST');
+        } else {
+      	  send('api/cond_pagamento/edit', this, 'PUT');
+        }
+        
+        e.preventDefault(); // prevent actual form submit
+    });
+     
+  function validateCondPagamento(cond_pag) {
+    if(cond_pag.nome_condicao.value == '' && cond_pag.forma_pag.value == '' && cond_pag.qtd_titulos.value == '' && cond_pag.condicao_qtd_dias.value == '' && cond_pag.dt_cadastro.value == '' && cond_pag.status.value == '') {
+      $('#idError').text('Informações inválidas.');
+      $('#idError').show();
+      return false;
+    }
+    else {
+      $('#idError').hide();
+      return true;
+    }
+    return true;
+  }
+        
+    </script>
+
+  </body>
+</html>

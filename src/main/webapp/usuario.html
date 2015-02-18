@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Projeto M</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+      .error { color: red; }
+      .success { color: green; }
+    </style>
+    <link href="static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://twitter.github.io/bootstrap/assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/bootstrap/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/bootstrap/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="static/bootstrap/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="static/bootstrap/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="static/bootstrap/ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Projeto M</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="mailto:edson.rosati@gmail.com.br">Contato</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Menu</li>
+              <li><a href="index.html">Busca Produtos</a></li>
+              <li class="active"><a href="usuario.html">Usuário</a></li>
+              <li><a href="produto.html">Produto</a></li>
+              <li><a href="/mazza/j_spring_security_logout">Sair</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="">
+	        <div class="error hide" id="removeError">Erro ao remover.</div>
+	        <div class="success hide" id="removeSuccess">Removido com sucesso.</div>
+			<a href="#addModal" role="button" class="btn" data-toggle="modal">Novo</a>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="users"></tbody>
+            </table>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Projeto M 2013</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+ 
+<!-- Modal -->
+<div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <form id="addForm">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="addModalLabel">Novo Usuário</h3>
+  </div>
+  <div class="modal-body">
+      <div class="error hide" id="idError">Erro ao adicionar.</div>
+      <div class="success hide" id="idSuccess">Dados salvos com sucesso.</div>
+<!--       <label for="userId">ID : </label><input name="id" id="userId" type="number" /> -->
+	  <input name="id" id="userId" type="hidden" />
+      <label for="userNome">Nome : </label><input name="nome" id="userNome" type="text" />
+      <label for="userSenha">Senha : </label><input name="senha" id="userSenha" type="password" />
+      <label for="userEmail">Email : </label><input name="email" id="userEmail" type="text" />
+      <label for="userRole">Role : </label><input name="role" id="userRole" type="text" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true" id="fecharModal">Fechar</button>
+    <button class="btn btn-primary" type="submit">Salvar</button>
+    <a onclick=""></a>
+  </div>
+  </form>
+</div>
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="static/js/jquery-1.9.1.min.js"></script>
+    <script src="static/js/serialize-json.jquery.js"></script>
+    <script src="static/js/mazza.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        	$.getJSON(getAbsolutePath() + 'api/usuario', function(data) {
+        		var user;
+        		if (data.usuario.length == undefined) {
+        			user = data;
+        		} else {
+        			user = data.usuario;
+        		}
+        	    $.each(user, function(index, item){
+        	    	$('#users').append('<tr>');
+        	    	$('#users').append('<td>' + item.id + '</td>');
+        	    	$('#users').append('<td>' + item.nome + '</td>');
+        	    	$('#users').append('<td>' + item.email + '</td>');
+        	    	$('#users').append('<td>' + item.role + '</td>');
+        	    	$('#users').append('<td><a href="#" onclick="remove('+item.id+');"><input alt="Excluir" src="static/images/delete.png" title="Excluir" type="image" value="Excluir" /></a></td>');
+        	    	$('#users').append('<td><a href="#" onclick="edit('+item.id+');"><input alt="Atualizar" src="static/images/update.png" title="Atualizar" type="image" value="Atualizar" /></a></td>');
+        	    	$('#users').append('</tr>');
+        	    });
+            });
+       });
+        
+	function edit(id) {
+		 $.getJSON(getAbsolutePath() + 'api/usuario/' + id, function(data) {
+			$('#userId').val(data.id);
+			$('#userNome').val(data.nome);
+			$('#userSenha').val(data.senha);
+			$('#userEmail').val(data.email);
+			$('#userRole').val(data.role);
+			$('#addModal').modal();
+		 });
+		return false;
+	}
+	
+	$('#fecharModal').click(function(e) {
+		$('#userId').val('');
+		$('#userNome').val('');
+		$('#userSenha').val('');
+		$('#userEmail').val('');
+		$('#userRole').val('');
+		$('#idError').hide();
+    	$('#idSuccess').hide();
+    	e.preventDefault(); // prevent actual form submit
+	});
+	
+	function remove(id) {
+		sendDelete('api/usuario/remove/' + id);
+	}
+	
+    // add user
+    $('#addForm').submit(function(e) {
+      if(!validateUsuario(this)) 
+        return false;
+        
+        if (this.id.value == '') {
+      	  send('api/usuario/add', this, 'POST');
+        } else {
+      	  send('api/usuario/edit', this, 'POST');
+        }
+        
+        e.preventDefault(); // prevent actual form submit
+    });
+     
+  function validateUsuario(user) {
+    if(user.nome.value == ''&& user.email.value == ''&& user.senha.value == ''&& user.role.value == '') {
+      $('#idError').text('Informações inválidas.');
+      $('#idError').show();
+      return false;
+    }
+    else {
+      $('#idError').hide();
+      return true;
+    }
+    return true;
+  }
+        
+    </script>
+
+  </body>
+</html>

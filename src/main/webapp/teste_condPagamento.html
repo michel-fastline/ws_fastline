@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Condição Pagamento</title>
+<link rel="stylesheet" href="static/css/styles.css" />
+</head>
+
+<body>
+
+<div class="header">
+	<input type="text" id="searchKey"/>
+	<button id="btnSearch">Search</button>
+	<button id="btnAdd">New Condicao Pagamento</button>
+</div>
+
+
+<div class="leftArea">
+<ul id="cond_pagList"></ul>
+</div>
+
+<form id="cond_pagForm">
+	
+<div class="mainArea">
+
+<label>Id:</label>
+<input id="cond_pagId" name="id_cond_pagamento" type="text" disabled />
+
+<label>Nome Condição:</label>
+<input type="text" id="nome_condicao" name="nome_condicao" required>
+
+<label>Forma de Pagamento:</label>
+<input type="text" id="forma_pag" name="forma_pag"/>
+
+<label>Quantidade de Titulos:</label>
+<input type="text" id="qtd_titulos" name="qtd_titulos"/>
+
+<label>Quantidade de Dias:</label>
+<input type="text" id="condicao_qtd_dias" name="condicao_qtd_dias"/>
+
+<label>Data de cadastro:</label>
+<input type="date" id="dt_cadastro" name="dt_cadastro"/>
+
+<label>Data de inativação:</label>
+<input type="date" id="dt_inativacao" name="dt_inativacao"/>
+
+<label>Status:</label>
+<input type="text" id="status" name="status"/>
+
+<button id="btnSave">Save</button>
+<button id="btnDelete">Delete</button>
+
+</div>
+
+
+
+</form>
+
+<script src="static/js/jquery-1.7.1.min.js"></script>
+<script src="static/js/main.js"></script>
+
+</body>
+</html>

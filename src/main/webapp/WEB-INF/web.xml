@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<javaee:display-name>WS_FastLine</javaee:display-name>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- Spring -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>WS_FastlineManager</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WS_FastlineManager</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/*</url-pattern>
+		<url-pattern>*.html</url-pattern>
+		<url-pattern>/static/*</url-pattern>
+		<!-- <url-pattern>/j_spring_security_logout</url-pattern> -->
+		<!-- <url-pattern>/j_spring_security_check</url-pattern> -->
+	</servlet-mapping>
+
+	<!-- <filter> -->
+
+	<!-- <filter-name>springSecurityFilterChain</filter-name> -->
+	<!-- <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> -->
+	<!-- </filter> -->
+	<!-- <filter-mapping> -->
+	<!-- <filter-name>springSecurityFilterChain</filter-name> -->
+	<!-- <url-pattern>/*</url-pattern> -->
+	<!-- </filter-mapping> -->
+	<!-- <filter> -->
+	<!-- <filter-name>OpenEntityManagerInViewFilter</filter-name> -->
+	<!-- <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class> -->
+	<!-- </filter> -->
+	<!-- <filter-mapping> -->
+	<!-- <filter-name>OpenEntityManagerInViewFilter</filter-name> -->
+	<!-- <url-pattern>/*</url-pattern> -->
+	<!-- <dispatcher>REQUEST</dispatcher> -->
+	<!-- <dispatcher>FORWARD</dispatcher> -->
+	<!-- <dispatcher>ERROR</dispatcher> -->
+	<!-- </filter-mapping> -->
+  
+  
+<!--    Utilizado para nao retormar mensagem de execption Lazy -->
+	
+	<filter>
+		<filter-name>entityManagerInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+		<init-param>
+			<param-name>entityManagerFactoryBeanName</param-name>
+			<param-value>entityManagerFactory</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>entityManagerInViewFilter</filter-name>
+		<url-pattern>/api/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+<!-- 	FIM LAZY -->
+
+	<servlet>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>br.com.fastline.ws_fastline.ws</param-value>
+		</init-param>
+<!-- 		<init-param> -->
+<!-- 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name> -->
+<!-- 			<param-value>true</param-value> -->
+<!-- 		</init-param> -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>/welcome.html</welcome-file>
+	</welcome-file-list>
+</web-app>
